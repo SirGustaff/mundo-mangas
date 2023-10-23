@@ -1,0 +1,84 @@
+header {
+    background-color: #5198EE;
+}
+
+header .site-logo {
+    align-self: center;
+    width: 15em;
+}
+
+header .icones {
+    width: 50px;
+}
+
+/* Configuração da estilização das funcionalidades */
+
+.header-features {
+    padding: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2em;
+}
+
+/* Configuração Barra de Pesquisa */
+
+header .input-wrapper {
+    align-self: center;
+    width: 60vw;
+    border-radius: 10px;
+    background-color: white;
+}
+
+header .input-wrapper form {
+    display: flex;
+    flex-flow: row-reverse;
+    gap: 10px;
+}
+
+header .botao-pesquisa {
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    border-right: 1px solid #A7A7A7;
+}
+
+header .area-pesquisa {
+    font-size: 1em;
+    width: 100%;
+    border: none;
+    background-color: transparent;
+}
+
+header .area-pesquisa:focus {
+    outline: none;
+}
+
+/* Configurando Principais Editoras */
+
+nav {
+    background-color: #284B75;
+}
+
+nav .principais-editoras {
+    display: flex;
+    place-content: center;
+    list-style-type: none;
+}
+
+nav .item-principais-editoras {
+    width: 200px;
+    padding: 10px;
+    text-align: center;
+    border-right: 2px solid black;
+}
+
+nav .item-principais-editoras a {
+    color: white;
+    text-decoration: none;
+    font-weight: normal;
+}
+
+nav .item-principais-editoras:last-child {
+    border-right: none;
+}

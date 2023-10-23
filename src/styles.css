@@ -1,1 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+
+* {
+    margin: 0px;
+}
+
+main {
+    display: grid;
+    margin: 15px 0px;
+    grid-template-columns: 1fr 3fr 1fr;
+}

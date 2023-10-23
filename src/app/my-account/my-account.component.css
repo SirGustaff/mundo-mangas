@@ -1,0 +1,26 @@
+.myAccount a {
+    text-decoration: none;
+    color: black;
+}
+
+.myAccount h1 {
+    margin-bottom: 15px;
+}
+
+.myAccount .myAccountCards {
+    margin: 0px 0px 60px 0px;
+    gap: 40px;
+    display: flex;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #D9D9D9;
+}
+
+.myAccount .myAccountCards img {
+    width: 100px;
+}
+
+.myAccount .myAccountCards h2 {
+    font-size: 2em;
+    align-self: center;
+}

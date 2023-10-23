@@ -1,6 +1,10 @@
 <ng-template *ngIf="isAdminPage; then adminHeader else defaultHeader"></ng-template>
-<ng-template #adminHeader><admin-header></admin-header></ng-template>
-<ng-template #defaultHeader><default-header></default-header></ng-template>
-<main>
-    <router-outlet></router-outlet> 
-</main>
+<ng-template #adminHeader>
+    <router-outlet></router-outlet>
+</ng-template>
+<ng-template #defaultHeader>
+    <default-header></default-header>
+    <main>
+        <router-outlet></router-outlet> 
+    </main>
+</ng-template>

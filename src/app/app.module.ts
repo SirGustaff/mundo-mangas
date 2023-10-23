@@ -5,7 +5,12 @@ import { AppComponent } from './app.component';
 import { DefaultHeaderComponent } from './default-header/default-header.component';
 import { MyAccountComponent } from './my-account/my-account.component';
 import { HomeComponent } from './home/home.component';
-import { AdminHeaderComponent } from './admin-header/admin-header.component';
+import { AdminHeaderComponent } from './admin/admin-header/admin-header.component';
+import { AdminComponent } from './admin/admin.component';
+import { AddCategoryComponent } from './admin/Categoria/add-category/add-category.component';
+import { AddPublisherComponent } from './admin/Categoria/add-publisher/add-publisher.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ListarCategoriaComponent } from './admin/Categoria/listar-categoria/listar-categoria.component';
 
 
 @NgModule({
@@ -14,11 +19,16 @@ import { AdminHeaderComponent } from './admin-header/admin-header.component';
     DefaultHeaderComponent,
     MyAccountComponent,
     HomeComponent,
-    AdminHeaderComponent
+    AdminHeaderComponent,
+    AdminComponent,
+    AddCategoryComponent,
+    AddPublisherComponent,
+    ListarCategoriaComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

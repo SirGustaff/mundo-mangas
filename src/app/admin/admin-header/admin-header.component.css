@@ -1,0 +1,20 @@
+header {
+    padding: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3em;
+    background-color: dimgray;
+}
+
+h1 {
+    margin-right: 20px;
+    place-self: center;
+}
+
+a {
+    place-self: center;
+    text-decoration: none;
+    font-weight: normal;
+    color: black;
+    font-size: 1.5em;
+}

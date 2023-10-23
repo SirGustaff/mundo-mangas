@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { DefaultHeaderComponent } from './default-header/default-header.component';
 import { MyAccountComponent } from './my-account/my-account.component';
 import { HomeComponent } from './home/home.component';
-import { AdminHeaderComponent } from './default-header/admin-header/admin-header.component';
+import { AdminHeaderComponent } from './admin-header/admin-header.component';
 
 
 @NgModule({

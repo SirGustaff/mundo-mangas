@@ -4,7 +4,7 @@ import { HomeComponent } from './home/home.component';
 import { MyAccountComponent } from './my-account/my-account.component';
 import { AdminComponent } from './admin/admin.component';
 import { AddCategoryComponent } from './admin/Categoria/add-category/add-category.component';
-import { AddPublisherComponent } from './admin/Categoria/add-publisher/add-publisher.component';
+import { AddPublisherComponent } from './admin/add-publisher/add-publisher.component';
 import { ListarCategoriaComponent } from './admin/Categoria/listar-categoria/listar-categoria.component';
 
 const routes: Routes = [

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoriaService } from './categoria.service';
 import { Categorias } from './categorias';
+import { Observable } from 'rxjs';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-listar-categoria',
@@ -9,13 +11,36 @@ import { Categorias } from './categorias';
 })
 export class ListarCategoriaComponent implements OnInit {
 
-  categorias: Categorias[];;
+  categorias: Categorias[];
 
-  constructor (private service: CategoriaService) {}
+  categorias$: Observable<Categorias[]>;
+
+  orderParam: FormGroup;
+
+  constructor (
+      private service: CategoriaService,
+      private formBuilder: FormBuilder,
+  ) {
+    this.orderParam = this.formBuilder.group({
+      order: '',
+    })
+  }
 
   ngOnInit() {
-    this.service.list().subscribe(dados => this.categorias = dados);
+    let order = this.orderParam.get('order')?.value
+
+    this.categorias$ = this.service.getCategory(order)
+    
+  }
+
+  submitParams() {
+
+    let order = this.orderParam.get('order')?.value
+
+    this.categorias$ = this.service.getCategory(order)
+    console.log(order)
   }
 
   
+
 }

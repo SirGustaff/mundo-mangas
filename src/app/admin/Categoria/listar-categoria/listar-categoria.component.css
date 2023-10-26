@@ -1,0 +1,23 @@
+/* Configurações gerais da tabela */
+
+form {
+    margin-top: 10px;
+}
+
+input {
+    margin-left: 10px;
+}
+
+label {
+    margin-left: 5px;
+}
+
+/* Configurações dos voltar e próxima */
+
+.trocar-pagina {
+    display: flex;
+}
+
+.trocar-pagina #proximo {
+    margin-left: auto;
+}

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Categorias } from './categorias';
 import { tap } from 'rxjs/operators';
@@ -8,12 +8,19 @@ import { tap } from 'rxjs/operators';
 })
 export class CategoriaService {
 
-  private readonly API = 'http://localhost:8080/categorias?page=1&order=asc';
+  private readonly url = 'http://localhost:8080/categorias';
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+  ) {}
 
-  list() {
-    return this.http.get<Categorias[]>(this.API)
+  getCategory(order: string, page: number = 1) {
+
+    let params = new HttpParams();
+    params = params.set('page', page)
+    params = params.set('order', order)
+  
+    return this.http.get<Categorias[]>(this.url, { params })
     .pipe(
       tap(console.log)
     );

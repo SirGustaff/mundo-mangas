@@ -2,12 +2,24 @@
     <div class="card-header">
       <div class="float-left">
         <h4>Categorias</h4>
-        <p>Itens encontrados: {{ categorias.length + 1 }}</p>
+        <p>Itens encontrados: {{ (categorias$ | async)?.length }}</p>
       </div>
       <div class="float-start">
         <button type="button" class="btn btn-primary" [routerLink]="['novo']">Nova Categoria</button>
         {{ ' ' }}
         <button type="button" class="btn btn-secondary">Atualizar</button>
+        <form [formGroup]="orderParam" (ngSubmit)="submitParams()">
+          <span>Filtrar por ordem:</span>
+          <label>
+            <input type="radio" formControlName="order" name="order" value="asc" (ngModelChange)="submitParams()"> Ascendente
+          </label>
+          <label>
+            <input  type="radio" formControlName="order" name="order" value="dsc" (ngModelChange)="submitParams()"> Decrescente
+          </label>
+          <label>
+            <input  type="radio" formControlName="order" name="order" value="" (ngModelChange)="submitParams()" checked="checked"> Por Id
+          </label>
+        </form>
       </div>
     </div>
     <div class="card-body">
@@ -20,7 +32,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let categoria of categorias">
+          <tr *ngFor="let categoria of categorias$ | async">
             <td>{{ categoria.id }}</td>
             <td>{{ categoria.nome }}</td>
             <td>
@@ -37,5 +49,9 @@
           </tr>
         </tbody>
       </table>
+      <div class="trocar-pagina" *ngIf="(categorias$ | async)?.length == 20">
+        <button id="voltar">Voltar</button>
+        <button id="proximo">Próxima</button>
+      </div>
     </div>
   </div>

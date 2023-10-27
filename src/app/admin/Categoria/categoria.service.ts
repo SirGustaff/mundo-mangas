@@ -1,14 +1,16 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Categorias } from './categorias';
-import { tap } from 'rxjs/operators';
+import { take, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategoriaService {
 
-  private readonly url = 'http://localhost:8080/categorias/por-nome';
+  private readonly urlGet = 'http://localhost:8080/categorias/por-nome';
+
+  private readonly urlPost = 'http://localhost:8080/categorias';
 
   constructor(
     private http: HttpClient,
@@ -22,9 +24,13 @@ export class CategoriaService {
     params = params.set('order', order);
     
   
-    return this.http.get<Categorias[]>(this.url, { params })
+    return this.http.get<Categorias[]>(this.urlGet, { params })
     .pipe(
       tap(console.log)
     );
+  }
+
+  createCategory(categoria: any) {
+    return this.http.post(this.urlPost, categoria).pipe(take(1));
   }
 }

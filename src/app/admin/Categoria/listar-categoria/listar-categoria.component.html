@@ -2,24 +2,21 @@
     <div class="card-header">
       <div class="float-left">
         <h4>Categorias</h4>
-        <p>Itens encontrados: {{ (categorias$ | async)?.length }}</p>
       </div>
       <div class="float-start">
-        <button type="button" class="btn btn-primary" [routerLink]="['novo']">Nova Categoria</button>
-        {{ ' ' }}
-        <button type="button" class="btn btn-secondary">Atualizar</button>
-        <form [formGroup]="orderParam" (ngSubmit)="submitParams()">
+        <span>Itens encontrados: {{ (categorias$ | async)?.length }}</span>
+        <form [formGroup]="params">
           <span>Filtrar por ordem:</span>
           <label>
-            <input type="radio" formControlName="order" name="order" value="asc" (ngModelChange)="submitParams()"> Ascendente
+            <input type="radio" formControlName="order" name="order" value="asc" (ngModelChange)="selectOrder()"> Ascendente
           </label>
           <label>
-            <input  type="radio" formControlName="order" name="order" value="dsc" (ngModelChange)="submitParams()"> Decrescente
-          </label>
-          <label>
-            <input  type="radio" formControlName="order" name="order" value="" (ngModelChange)="submitParams()" checked="checked"> Por Id
+            <input type="radio" name="order" value="dsc"  formControlName="order" (ngModelChange)="selectOrder()"> Decrescente
           </label>
         </form>
+        <div class="md-form active-cyan active-cyan-2 mb-3">
+          <input class="form-control" id="search" type="text" placeholder="Search" aria-label="Search">
+        </div>
       </div>
     </div>
     <div class="card-body">
@@ -49,9 +46,12 @@
           </tr>
         </tbody>
       </table>
-      <div class="trocar-pagina" *ngIf="(categorias$ | async)?.length == 20">
-        <button id="voltar">Voltar</button>
-        <button id="proximo">Próxima</button>
+      <div class="trocar-pagina" >
+            <button class="btn btn-secondary btn-sm" id="voltar" value="{{ this.page }}" (click)="previousPage()">Voltar</button>
+            <button class="btn btn-secondary  btn-sm" id="proximo" (click)="nextPage()" >Próxima</button>
       </div>
+      <p style="text-align: center;">Página: {{ this.page }}</p>
     </div>
   </div>
+
+ 

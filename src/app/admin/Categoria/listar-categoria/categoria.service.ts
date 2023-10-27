@@ -14,11 +14,12 @@ export class CategoriaService {
     private http: HttpClient,
   ) {}
 
-  getCategory(order: string, page: number = 1) {
+  getCategory(order: string, page: number) {
 
     let params = new HttpParams();
-    params = params.set('page', page)
-    params = params.set('order', order)
+    params = params.set('page', page);
+    params = params.set('order', order);
+    
   
     return this.http.get<Categorias[]>(this.url, { params })
     .pipe(

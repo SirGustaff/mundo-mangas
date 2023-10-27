@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoriaService } from './categoria.service';
 import { Categorias } from './categorias';
-import { Observable } from 'rxjs';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { Observable, isEmpty, map } from 'rxjs';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-listar-categoria',
@@ -15,32 +15,49 @@ export class ListarCategoriaComponent implements OnInit {
 
   categorias$: Observable<Categorias[]>;
 
-  orderParam: FormGroup;
+  params: FormGroup = this.formBuilder.group({
+      order: new FormControl('dsc'),
+      page: new FormControl(),
+    })
+    
 
+  page: number = 1;
+  
   constructor (
       private service: CategoriaService,
       private formBuilder: FormBuilder,
-  ) {
-    this.orderParam = this.formBuilder.group({
-      order: '',
-    })
-  }
+  ) {}
 
   ngOnInit() {
-    let order = this.orderParam.get('order')?.value
-
-    this.categorias$ = this.service.getCategory(order)
-    
+    let order = this.params.controls['order']?.value;
+    this.categorias$ = this.service.getCategory(order, this.page);
   }
 
-  submitParams() {
-
-    let order = this.orderParam.get('order')?.value
-
-    this.categorias$ = this.service.getCategory(order)
-    console.log(order)
+  selectOrder() {
+    let order = this.params.controls['order']?.value;
+    this.categorias$ = this.service.getCategory(order, this.page);
   }
 
-  
+  previousPage() {
+    if (this.page - 1 >= 1) {
+      let order = this.params.controls['order']?.value;
+      this.page -= 1;
+      this.categorias$ = this.service.getCategory(order, this.page);
+    }
+  }
+
+  nextPage() {
+    this.service.getCategory('', this.page + 1).pipe(
+      map(array => array.length === 0) 
+    ).subscribe((empty: boolean) => {
+      if (empty) {
+        console.log(empty)
+      } else {
+        let order = this.params.controls['order']?.value;
+        this.page += 1;
+        this.categorias$ = this.service.getCategory(order, this.page);
+      }
+    });
+  }
 
 }

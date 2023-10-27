@@ -21,12 +21,12 @@ const routes: Routes = [
     component: AdminComponent,
     children: [
       {
-        path: 'list-category',
+        path: 'category',
         component: ListarCategoriaComponent
       },
       {
-        path: 'add-publisher',
-        component: AddPublisherComponent
+        path: 'add-category',
+        component: AddCategoryComponent
       }
     ]
   }

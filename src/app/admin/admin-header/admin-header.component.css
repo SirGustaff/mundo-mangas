@@ -11,10 +11,7 @@ h1 {
     place-self: center;
 }
 
-a {
-    place-self: center;
-    text-decoration: none;
-    font-weight: normal;
-    color: black;
-    font-size: 1.5em;
+.dropdown {
+    align-self: center;
 }
+

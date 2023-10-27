@@ -21,3 +21,10 @@ label {
 .trocar-pagina #proximo {
     margin-left: auto;
 }
+
+/* Configurações da barra de pesquisa */
+
+input#search.form-control {
+    margin-top: 15px;
+    margin-left: 0px;
+}

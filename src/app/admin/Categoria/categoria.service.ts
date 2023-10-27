@@ -12,6 +12,8 @@ export class CategoriaService {
 
   private readonly urlPost = 'http://localhost:8080/categorias';
 
+  private readonly urlPut = 'http://localhost:8080/categorias/';
+
   constructor(
     private http: HttpClient,
   ) {}
@@ -30,7 +32,12 @@ export class CategoriaService {
     );
   }
 
-  createCategory(categoria: any) {
+  createCategory(categoria: Categorias) {
     return this.http.post(this.urlPost, categoria).pipe(take(1));
   }
+
+  editCategory(categoria: Categorias){
+    return this.http.put(`${this.urlPut}${categoria.id}`, categoria).pipe(take(1));
+  }
+
 }

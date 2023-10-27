@@ -3,6 +3,8 @@ import { CategoriaService } from '../categoria.service';
 import { Categorias } from '../categorias';
 import { Observable, isEmpty, map } from 'rxjs';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { EditCategoryComponent } from '../edit-category/edit-category.component';
 
 @Component({
   selector: 'app-listar-categoria',
@@ -25,6 +27,7 @@ export class ListarCategoriaComponent implements OnInit {
   page: number = 1;
 
   constructor(
+    private dialog: MatDialog,
     private service: CategoriaService,
     private formBuilder: FormBuilder,
   ) { }
@@ -65,8 +68,14 @@ export class ListarCategoriaComponent implements OnInit {
     this.categorias$ = this.getCategory()
   }
 
-  onEdit(id: number) {
+  onEdit(categoria: Categorias) {
 
+    const dialogRef = this.dialog.open(EditCategoryComponent)
+
+    dialogRef.componentInstance.categoria = categoria;
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.categorias$ = this.getCategory();
+    });
   }
-
 }

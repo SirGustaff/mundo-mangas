@@ -23,45 +23,52 @@ export class ListarCategoriaComponent implements OnInit {
     
 
   page: number = 1;
-  
+
   constructor (
       private service: CategoriaService,
       private formBuilder: FormBuilder,
   ) {}
 
+  
+
   ngOnInit() {
     let order = this.params.controls['order']?.value;
-    this.categorias$ = this.service.getCategory(order, this.page);
+    this.categorias$ = this.service.getCategory(this.getNomeValue(), this.page, this.getOrderValue());
+  }
+
+  getNomeValue() {
+    return this.params.controls['nome']?.value;
+  }
+
+  getOrderValue() {
+    return this.params.controls['order']?.value;
   }
 
   selectOrder() {
-    let order = this.params.controls['order']?.value;
-    this.categorias$ = this.service.getCategory(order, this.page);
+    this.categorias$ = this.service.getCategory(this.getNomeValue(), this.page, this.getOrderValue());
   }
 
   previousPage() {
     if (this.page - 1 >= 1) {
-      let order = this.params.controls['order']?.value;
       this.page -= 1;
-      this.categorias$ = this.service.getCategory(order, this.page);
+      this.categorias$ = this.service.getCategory(this.getNomeValue(), this.page, this.getOrderValue());
     }
   }
 
   nextPage() {
-    this.service.getCategory('', this.page + 1).pipe(
+    this.service.getCategory(this.getNomeValue(), this.page + 1, this.getOrderValue()).pipe(
       map(array => array.length === 0) 
     ).subscribe((empty: boolean) => {
       if (empty) {
         console.log(empty)
       } else {
-        let order = this.params.controls['order']?.value;
         this.page += 1;
-        this.categorias$ = this.service.getCategory(order, this.page);
+        this.categorias$ = this.service.getCategory(this.getNomeValue(), this.page, this.getOrderValue());
       }
     });
   }
 
   onSearch() {
-    console.log(this.params.controls['nome']?.value);
+    this.categorias$ = this.service.getCategory(this.getNomeValue(), this.page, this.getOrderValue());
   }
 }

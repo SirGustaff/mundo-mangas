@@ -28,3 +28,7 @@ input#search.form-control {
     margin-top: 15px;
     margin-left: 0px;
 }
+
+search-wrapper {
+    display: flex;
+}

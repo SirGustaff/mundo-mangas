@@ -8,7 +8,7 @@ import { tap } from 'rxjs/operators';
 })
 export class CategoriaService {
 
-  private readonly url = 'http://localhost:8080/categorias';
+  private readonly url = 'http://localhost:8080/categorias/por-nome';
 
   constructor(
     private http: HttpClient,
@@ -17,6 +17,7 @@ export class CategoriaService {
   getCategory(order: string, page: number) {
 
     let params = new HttpParams();
+    params = params.set('nome', '')
     params = params.set('page', page);
     params = params.set('order', order);
     

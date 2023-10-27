@@ -18,6 +18,7 @@ export class ListarCategoriaComponent implements OnInit {
   params: FormGroup = this.formBuilder.group({
       order: new FormControl('dsc'),
       page: new FormControl(),
+      nome: new FormControl(''),
     })
     
 
@@ -60,4 +61,7 @@ export class ListarCategoriaComponent implements OnInit {
     });
   }
 
+  onSearch() {
+    console.log(this.params.controls['nome']?.value);
+  }
 }

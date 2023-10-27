@@ -8,14 +8,35 @@
         <form [formGroup]="params">
           <span>Filtrar por ordem:</span>
           <label>
-            <input type="radio" formControlName="order" name="order" value="asc" (ngModelChange)="selectOrder()"> Ascendente
+            <input 
+            type="radio" 
+            name="order" 
+            value="asc" 
+            formControlName="order" 
+            (ngModelChange)="selectOrder()"> Ascendente
           </label>
           <label>
-            <input type="radio" name="order" value="dsc"  formControlName="order" (ngModelChange)="selectOrder()"> Decrescente
+            <input 
+            type="radio" 
+            name="order" 
+            value="dsc"  
+            formControlName="order" 
+            (ngModelChange)="selectOrder()"> Decrescente
           </label>
         </form>
-        <div class="md-form active-cyan active-cyan-2 mb-3">
-          <input class="form-control" id="search" type="text" placeholder="Search" aria-label="Search">
+        <div class="search-wrapper">
+          <div class="md-form active-cyan active-cyan-2 mb-3" [formGroup] = "params">
+            <input
+            class="form-control"
+            id="search"
+            type="text"
+            name="nome"
+            formControlName="nome"
+            placeholder="Pesquisa pela categoria"
+            aria-label="Search"
+            >
+          </div>
+          <button class="btn btn-outline-secondary" type="submit" (click)="onSearch()">Pesquisar</button>
         </div>
       </div>
     </div>

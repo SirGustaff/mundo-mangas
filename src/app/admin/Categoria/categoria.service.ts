@@ -12,7 +12,7 @@ export class CategoriaService {
 
   private readonly urlPost = 'http://localhost:8080/categorias';
 
-  private readonly urlPut = 'http://localhost:8080/categorias/';
+  private readonly urlPutDelete = 'http://localhost:8080/categorias/';
 
   constructor(
     private http: HttpClient,
@@ -37,7 +37,10 @@ export class CategoriaService {
   }
 
   editCategory(categoria: Categorias){
-    return this.http.put(`${this.urlPut}${categoria.id}`, categoria).pipe(take(1));
+    return this.http.put(`${this.urlPutDelete}${categoria.id}`, categoria).pipe(take(1));
   }
 
+  deleteCategory(id: number) {
+    return this.http.delete(`${this.urlPutDelete}${id}`).pipe(take(1));
+  }
 }

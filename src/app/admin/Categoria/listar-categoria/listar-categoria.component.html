@@ -57,13 +57,13 @@
               <span class="float-end">
                 <button 
                 class="btn btn-outline-warning mb-1 btn-sm"
-                (click)="onEdit(categoria)"
-                data-bs-toggle="modal" 
-                data-bs-target="#exampleModal">
+                (click)="onEdit(categoria)">
                   Atualizar
                 </button>
                 {{ ' ' }}
-                <button class="btn btn-outline-danger mb-1 btn-sm">
+                <button 
+                class="btn btn-outline-danger mb-1 btn-sm"
+                (click)="onDelete(categoria.id)">
                   Remover
                 </button>
               </span>

@@ -74,8 +74,19 @@ export class ListarCategoriaComponent implements OnInit {
 
     dialogRef.componentInstance.categoria = categoria;
 
-    dialogRef.afterClosed().subscribe(result => {
-      this.categorias$ = this.getCategory();
+    dialogRef.afterClosed().subscribe({
+      next: data => {
+        this.categorias$ = this.getCategory();
+      },
+    });
+  }
+
+  onDelete(id: number) {
+    this.service.deleteCategory(id).subscribe({
+      next: data => {
+        alert("Categoria deletada com sucesso");
+        this.categorias$ = this.getCategory();
+      },
     });
   }
 }

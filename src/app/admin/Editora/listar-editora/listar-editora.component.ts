@@ -1,21 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { CategoriaService } from '../categoria.service';
-import { Categorias } from '../categorias';
+import { EditoraService } from '../editora.service';
+import { Editoras } from '../editoras';
 import { Observable, isEmpty, map } from 'rxjs';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { EditCategoryComponent } from '../edit-category/edit-category.component';
+import { EditPublisherComponent } from '../edit-publisher/edit-publisher.component';
 
 @Component({
-  selector: 'app-listar-categoria',
-  templateUrl: './listar-categoria.component.html',
-  styleUrls: ['./listar-categoria.component.css']
+  selector: 'app-listar-editora',
+  templateUrl: './listar-editora.component.html',
+  styleUrls: ['./listar-editora.component.css']
 })
-export class ListarCategoriaComponent implements OnInit {
 
-  categorias: Categorias[];
+export class ListarEditoraComponent implements OnInit {
 
-  categorias$: Observable<Categorias[]>;
+  editoras: Editoras[];
+
+  editoras$: Observable<Editoras[]>;
 
   params: FormGroup = this.formBuilder.group({
     order: new FormControl('dsc'),
@@ -28,26 +29,26 @@ export class ListarCategoriaComponent implements OnInit {
 
   constructor(
     private dialog: MatDialog,
-    private service: CategoriaService,
+    private service: EditoraService,
     private formBuilder: FormBuilder,
   ) { }
 
   ngOnInit() {
-    this.categorias$ = this.getCategory();
+    this.editoras$ = this.getPublisher();
   }
 
-  getCategory() {
+  getPublisher() {
     return this.service.getCategory(this.params.get('nome')?.value, this.page, this.params.get('order')?.value);
   }
 
   selectOrder() {
-    this.categorias$ = this.getCategory();
+    this.editoras$ = this.getPublisher();
   }
 
   previousPage() {
     if (this.page - 1 >= 1) {
       this.page -= 1;
-      this.categorias$ = this.getCategory();
+      this.editoras$ = this.getPublisher();
     }
   }
 
@@ -59,25 +60,25 @@ export class ListarCategoriaComponent implements OnInit {
         console.log(empty)
       } else {
         this.page += 1;
-        this.categorias$ = this.getCategory()
+        this.editoras$ = this.getPublisher()
       }
     });
   }
 
   onSearch() {
-    this.categorias$ = this.getCategory()
+    this.editoras$ = this.getPublisher()
   }
 
-  onEdit(categoria: Categorias) {
+  onEdit(editora: Editoras) {
 
-    const dialogRef = this.dialog.open(EditCategoryComponent)
+    const dialogRef = this.dialog.open(EditPublisherComponent)
 
-    dialogRef.componentInstance.categoria = categoria;
+    dialogRef.componentInstance.editora = editora;
 
     dialogRef.afterClosed().subscribe({
       next: data => {
         alert("Categoria atualizada com sucesso");
-        this.categorias$ = this.getCategory();
+        this.editoras$ = this.getPublisher();
       },
     });
   }
@@ -85,8 +86,8 @@ export class ListarCategoriaComponent implements OnInit {
   onDelete(id: number) {
     this.service.deleteCategory(id).subscribe({
       next: data => {
-        alert("Categoria deletada com sucesso");
-        this.categorias$ = this.getCategory();
+        alert("Editora deletada com sucesso");
+        this.editoras$ = this.getPublisher();
       },
     });
   }

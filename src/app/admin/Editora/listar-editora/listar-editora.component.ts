@@ -89,6 +89,9 @@ export class ListarEditoraComponent implements OnInit {
         alert("Editora deletada com sucesso");
         this.editoras$ = this.getPublisher();
       },
+      error: error => {
+        alert(error.error.detail);
+      }
     });
   }
 }

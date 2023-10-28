@@ -1,11 +1,12 @@
 <form class="needs-validation" [formGroup]="categoryForm">
+  <h1>Criar nova categoria</h1>
   <div class="form-group">
-    <label class="control-label" for="categoria-form">Criar Nova Categoria</label>
+    <label class="control-label" for="nome">Nome:</label>
     <input 
     type="email" 
     class="form-control" 
     formControlName="nome"
-    id="categoria-form" 
+    id="nome" 
     placeholder="Nome da Categoria">
   </div>
   <div class="alert alert-danger" role="alert" *ngIf="!categoryForm.get('nome')?.valid && categoryForm.get('nome')?.touched">

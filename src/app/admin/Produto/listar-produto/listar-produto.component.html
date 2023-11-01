@@ -1,22 +1,26 @@
 <div class="card">
   <div class="card-header">
     <div class="float-left">
-      <h4>Categorias</h4>
+      <h4>Produtos</h4>
     </div>
     <div class="float-start">
-      <span>Itens encontrados: {{ (categoryPage$ | async)?.totalItems }}</span>
+      <span>Itens encontrados: {{ (productsPage$ | async)?.totalItems }}</span>
       <form [formGroup]="params">
         <span>Filtrar por ordem:</span>
         <select formControlName="order" style="margin-left: 10px;" (change)="selectOrder()">
           <option value="">ID</option>
           <option value="OrderByNameASC">A - Z</option>
           <option value="OrderByNameDESC">Z - A</option>
+          <option value="OrderByPriceDESC">Maior Preço</option>
+          <option value="OrderByPriceASC">Menor Preço</option>
+          <option value="OrderByTopSaleDESC">Mais Vendidos</option>
+          <option value="OrderByReleaseDateDESC">Mais Recentes</option>
         </select>
       </form>
       <div class="search-wrapper">
         <div class="md-form active-cyan active-cyan-2 mb-3" [formGroup]="params">
           <input class="form-control" id="search" type="text" name="nome" formControlName="nome"
-            placeholder="Pesquisa pela categoria" aria-label="Search">
+            placeholder="Pesquisa pela produto" aria-label="Search">
         </div>
         <button class="btn btn-outline-secondary" type="submit" (click)="onSearch()">Pesquisar</button>
       </div>
@@ -27,21 +31,33 @@
       <thead>
         <tr>
           <th>#</th>
-          <th>Categoria</th>
+          <th>Produto</th>
+          <th>Uri-Foto</th>
+          <th>Preço</th>
+          <th>Condição</th>
+          <th>Data</th>
+          <th>Quantidade em Estoque</th>
+          <th>Total Vendido</th>
           <th></th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let categoria of (categoryPage$ | async)?.items">
-          <td>{{ categoria.id }}</td>
-          <td>{{ categoria.nome }}</td>
+        <tr *ngFor="let produto of (productsPage$ | async)?.items">
+          <td>{{ produto.id }}</td>
+          <td>{{ produto.nome }}</td>
+          <td><a href="{{ produto.uriFoto }}">{{ produto.uriFoto | slice:0:20}}</a></td>
+          <td>R${{ produto.preco | number:'1.2-2' }}</td>
+          <td>{{ produto.ativo? 'Disponível' : 'Indisponível'}}</td>
+          <td>{{ produto.dataPublicacao }}</td>
+          <td>{{ produto.estoque }}</td>
+          <td>{{ produto.totalVendido }}</td>
           <td>
             <span class="float-end">
-              <button class="btn btn-outline-warning mb-1 btn-sm" (click)="onEdit(categoria)">
+              <button class="btn btn-outline-warning mb-1 btn-sm">
                 Atualizar
               </button>
               {{ ' ' }}
-              <button class="btn btn-outline-danger mb-1 btn-sm" (click)="onDelete(categoria.id)">
+              <button class="btn btn-outline-danger mb-1 btn-sm">
                 Remover
               </button>
             </span>
@@ -52,7 +68,7 @@
     <div style="display: flex; justify-content: center;">
       <form [formGroup]="params">
         <select formControlName="page" (change)="onChangePage()">
-          <option *ngFor="let page of [].constructor((categoryPage$ | async)?.totalPages); let i = index" [value]="i+1">
+          <option *ngFor="let page of [].constructor((productsPage$ | async)?.totalPages); let i = index" [value]="i+1">
             Página: {{ i+1 }}</option>
         </select>
       </form>

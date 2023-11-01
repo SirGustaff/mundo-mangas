@@ -7,6 +7,8 @@ import { AddCategoryComponent } from './admin/Categoria/add-category/add-categor
 import { AddPublisherComponent } from './admin/Editora/add-publisher/add-publisher.component';
 import { ListarCategoriaComponent } from './admin/Categoria/listar-categoria/listar-categoria.component';
 import { ListarEditoraComponent } from './admin/Editora/listar-editora/listar-editora.component';
+import { ListarProdutoComponent } from './admin/Produto/listar-produto/listar-produto.component';
+import { AddProductComponent } from './admin/Produto/add-product/add-product.component';
 
 const routes: Routes = [
   {
@@ -36,6 +38,14 @@ const routes: Routes = [
       {
         path: 'add-publisher',
         component: AddPublisherComponent
+      },
+      {
+        path: 'product',
+        component: ListarProdutoComponent
+      },
+      {
+        path: 'add-product',
+        component: AddProductComponent
       }
     ]
   }

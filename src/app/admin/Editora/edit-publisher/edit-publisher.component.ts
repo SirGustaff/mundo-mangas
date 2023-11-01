@@ -31,7 +31,7 @@ export class EditPublisherComponent implements OnInit {
 
   updateCategoria() {
     if (this.editForm.valid) {
-      this.service.editCategory(this.editForm.value).subscribe();
+      this.service.put(this.editForm.value).subscribe();
     }
     this.dialogRef.close();
   }

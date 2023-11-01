@@ -17,6 +17,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { EditCategoryComponent } from './admin/Categoria/edit-category/edit-category.component';
 import { ListarEditoraComponent } from './admin/Editora/listar-editora/listar-editora.component';
 import { EditPublisherComponent } from './admin/Editora/edit-publisher/edit-publisher.component';
+import { ListarProdutoComponent } from './admin/Produto/listar-produto/listar-produto.component';
+import { AddProductComponent } from './admin/Produto/add-product/add-product.component';
 
 
 @NgModule({
@@ -32,7 +34,9 @@ import { EditPublisherComponent } from './admin/Editora/edit-publisher/edit-publ
     ListarCategoriaComponent,
     EditCategoryComponent,
     ListarEditoraComponent,
-    EditPublisherComponent
+    EditPublisherComponent,
+    ListarProdutoComponent,
+    AddProductComponent
   ],
   imports: [
     BrowserModule,

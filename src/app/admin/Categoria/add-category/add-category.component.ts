@@ -25,7 +25,7 @@ export class AddCategoryComponent implements OnInit{
 
   onSubmit() {
     if(this.categoryForm.valid) {
-      this.service.createCategory(this.categoryForm.value).subscribe({
+      this.service.post(this.categoryForm.value).subscribe({
         next: data => {
           alert("Categoria Adicionada Com Sucesso")
           this.categoryForm.reset();

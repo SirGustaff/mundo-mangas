@@ -27,7 +27,7 @@ export class AddPublisherComponent implements OnInit{
 
   onSubmit() {
     if(this.editoraForm.valid) {
-      this.service.createCategory(this.editoraForm.value).subscribe({
+      this.service.post(this.editoraForm.value).subscribe({
         next: data => {
           alert("Editora Adicionada Com Sucesso")
           this.editoraForm.reset();

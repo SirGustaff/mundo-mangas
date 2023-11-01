@@ -1,82 +1,63 @@
 <div class="card">
-    <div class="card-header">
-      <div class="float-left">
-        <h4>Editoras</h4>
-      </div>
-      <div class="float-start">
-        <span>Itens encontrados: {{ (editoras$ | async)?.length }}</span>
-        <form [formGroup]="params">
-          <span>Filtrar por ordem:</span>
-          <label>
-            <input 
-            type="radio" 
-            name="order" 
-            value="asc" 
-            formControlName="order" 
-            (ngModelChange)="selectOrder()"> Alfabética
-          </label>
-          <label>
-            <input 
-            type="radio" 
-            name="order" 
-            value="dsc"  
-            formControlName="order" 
-            (ngModelChange)="selectOrder()"> Por Id
-          </label>
-        </form>
-        <div class="search-wrapper">
-          <div class="md-form active-cyan active-cyan-2 mb-3" [formGroup]="params">
-            <input
-            class="form-control"
-            id="search"
-            type="text"
-            name="nome"
-            formControlName="nome"
-            placeholder="Pesquisa pela categoria"
-            aria-label="Search"
-            >
-          </div>
-          <button class="btn btn-outline-secondary" type="submit" (click)="onSearch()">Pesquisar</button>
-        </div>
-      </div>
+  <div class="card-header">
+    <div class="float-left">
+      <h4>Editoras</h4>
     </div>
-    <div class="card-body">
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Categoria</th>
-            <th>Uri-Foto</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let editora of editoras$ | async">
-            <td>{{ editora.id }}</td>
-            <td>{{ editora.nome }}</td>
-            <td style="font-size: 12px;"><a href="{{ editora.uriFoto }}">{{ editora.uriFoto }}</a></td>
-            <td>
-              <span class="float-end">
-                <button 
-                class="btn btn-outline-warning mb-1 btn-sm"
-                (click)="onEdit(editora)">
-                  Atualizar
-                </button>
-                {{ ' ' }}
-                <button 
-                class="btn btn-outline-danger mb-1 btn-sm"
-                (click)="onDelete(editora.id)">
-                  Remover
-                </button>
-              </span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <div class="trocar-pagina" >
-            <button class="btn btn-secondary btn-sm" id="voltar" value="{{ this.page }}" (click)="previousPage()">Voltar</button>
-            <button class="btn btn-secondary  btn-sm" id="proximo" (click)="nextPage()" >Próxima</button>
+    <div class="float-start">
+      <span>Itens encontrados: {{ (publisherPage$ | async)?.totalItems }}</span>
+      <form [formGroup]="params">
+        <span>Filtrar por ordem:</span>
+        <select formControlName="order" style="margin-left: 10px;" (change)="selectOrder()">
+          <option value="">ID</option>
+          <option value="OrderByNameASC">A - Z</option>
+          <option value="OrderByNameDESC">Z - A</option>
+        </select>
+      </form>
+      <div class="search-wrapper">
+        <div class="md-form active-cyan active-cyan-2 mb-3" [formGroup]="params">
+          <input class="form-control" id="search" type="text" name="nome" formControlName="nome"
+            placeholder="Pesquisa pela categoria" aria-label="Search">
+        </div>
+        <button class="btn btn-outline-secondary" type="submit" (click)="onSearch()">Pesquisar</button>
       </div>
-      <p style="text-align: center;">Página: {{ this.page }}</p>
     </div>
   </div>
+  <div class="card-body">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Categoria</th>
+          <th>Uri-Foto</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let editora of (publisherPage$ | async)?.items">
+          <td>{{ editora.id }}</td>
+          <td>{{ editora.nome }}</td>
+          <td style="font-size: 12px;"><a href="{{ editora.uriFoto }}">{{ editora.uriFoto | slice:0:20}}</a></td>
+          <td>
+            <span class="float-end">
+              <button class="btn btn-outline-warning mb-1 btn-sm" (click)="onEdit(editora)">
+                Atualizar
+              </button>
+              {{ ' ' }}
+              <button class="btn btn-outline-danger mb-1 btn-sm" (click)="onDelete(editora.id)">
+                Remover
+              </button>
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div style="display: flex; justify-content: center;">
+      <form [formGroup]="params">
+        <select formControlName="page" (change)="onChangePage()">
+          <option *ngFor="let page of [].constructor((publisherPage$ | async)?.totalPages); let i = index"
+            [value]="i+1">Página: {{ i+1 }}</option>
+        </select>
+      </form>
+    </div>
+  </div>
+</div>

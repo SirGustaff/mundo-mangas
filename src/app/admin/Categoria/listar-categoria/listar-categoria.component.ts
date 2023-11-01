@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoriaService } from '../categoria.service';
-import { Categorias } from '../categorias';
+import { Categorias, CategoryPage } from '../categorias';
 import { Observable, isEmpty, map } from 'rxjs';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
@@ -13,18 +13,13 @@ import { EditCategoryComponent } from '../edit-category/edit-category.component'
 })
 export class ListarCategoriaComponent implements OnInit {
 
-  categorias: Categorias[];
-
-  categorias$: Observable<Categorias[]>;
+  categoryPage$: Observable<CategoryPage>;
 
   params: FormGroup = this.formBuilder.group({
-    order: new FormControl('dsc'),
-    page: new FormControl(),
+    order: new FormControl(''),
+    page: new FormControl(1),
     nome: new FormControl(''),
   })
-
-
-  page: number = 1;
 
   constructor(
     private dialog: MatDialog,
@@ -33,39 +28,23 @@ export class ListarCategoriaComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.categorias$ = this.getCategory();
+    this.categoryPage$ = this.getCategory();
   }
 
   getCategory() {
-    return this.service.getCategory(this.params.get('nome')?.value, this.page, this.params.get('order')?.value);
+    return this.service.get(this.params.get('nome')?.value, this.params.get('page')?.value, this.params.get('order')?.value);
   }
 
   selectOrder() {
-    this.categorias$ = this.getCategory();
+    this.categoryPage$ = this.getCategory();
   }
 
-  previousPage() {
-    if (this.page - 1 >= 1) {
-      this.page -= 1;
-      this.categorias$ = this.getCategory();
-    }
-  }
-
-  nextPage() {
-    this.service.getCategory(this.params.get('nome')?.value, this.page + 1, this.params.controls['order']?.value).pipe(
-      map(array => array.length === 0)
-    ).subscribe((empty: boolean) => {
-      if (empty) {
-        console.log(empty)
-      } else {
-        this.page += 1;
-        this.categorias$ = this.getCategory()
-      }
-    });
+  onChangePage() {
+    this.categoryPage$ = this.getCategory();
   }
 
   onSearch() {
-    this.categorias$ = this.getCategory()
+    this.categoryPage$ = this.getCategory()
   }
 
   onEdit(categoria: Categorias) {
@@ -77,16 +56,16 @@ export class ListarCategoriaComponent implements OnInit {
     dialogRef.afterClosed().subscribe({
       next: data => {
         alert("Categoria atualizada com sucesso");
-        this.categorias$ = this.getCategory();
+        this.categoryPage$ = this.getCategory();
       },
     });
   }
 
   onDelete(id: number) {
-    this.service.deleteCategory(id).subscribe({
+    this.service.delete(id).subscribe({
       next: data => {
         alert("Categoria deletada com sucesso");
-        this.categorias$ = this.getCategory();
+        this.categoryPage$ = this.getCategory();
       },
     });
   }

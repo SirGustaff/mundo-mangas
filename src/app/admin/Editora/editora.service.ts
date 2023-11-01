@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Editoras } from './editoras';
+import { Editoras, PublisherPage } from './editoras';
 import { take, tap } from 'rxjs/operators';
 
 @Injectable({
@@ -18,7 +18,7 @@ export class EditoraService {
     private http: HttpClient,
   ) {}
 
-  getCategory(nome: string, page: number, order: string) {
+  get(nome: string, page: number, order: string) {
 
     let params = new HttpParams();
     params = params.set('nome', nome)
@@ -26,21 +26,21 @@ export class EditoraService {
     params = params.set('order', order);
     
   
-    return this.http.get<Editoras[]>(this.urlGet, { params })
+    return this.http.get<PublisherPage>(this.urlGet, { params })
     .pipe(
       tap(console.log)
     );
   }
 
-  createCategory(editora: Editoras) {
+  post(editora: Editoras) {
     return this.http.post(this.urlPost, editora).pipe(take(1));
   }
 
-  editCategory(editora: Editoras){
+  put(editora: Editoras){
     return this.http.put(`${this.urlPutDelete}${editora.id}`, editora).pipe(take(1));
   }
 
-  deleteCategory(id: number) {
+  delete(id: number) {
     return this.http.delete(`${this.urlPutDelete}${id}`).pipe(take(1));
   }
 }

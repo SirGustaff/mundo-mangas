@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EditoraService } from '../editora.service';
-import { Editoras } from '../editoras';
+import { Editoras, PublisherPage } from '../editoras';
 import { Observable, isEmpty, map } from 'rxjs';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
@@ -14,18 +14,13 @@ import { EditPublisherComponent } from '../edit-publisher/edit-publisher.compone
 
 export class ListarEditoraComponent implements OnInit {
 
-  editoras: Editoras[];
-
-  editoras$: Observable<Editoras[]>;
+  publisherPage$: Observable<PublisherPage>;
 
   params: FormGroup = this.formBuilder.group({
-    order: new FormControl('dsc'),
-    page: new FormControl(),
+    order: new FormControl(''),
+    page: new FormControl(1),
     nome: new FormControl(''),
   })
-
-
-  page: number = 1;
 
   constructor(
     private dialog: MatDialog,
@@ -34,39 +29,23 @@ export class ListarEditoraComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.editoras$ = this.getPublisher();
+    this.publisherPage$ = this.getPublisher();
   }
 
   getPublisher() {
-    return this.service.getCategory(this.params.get('nome')?.value, this.page, this.params.get('order')?.value);
+    return this.service.get(this.params.get('nome')?.value, this.params.get('page')?.value, this.params.get('order')?.value);
   }
 
   selectOrder() {
-    this.editoras$ = this.getPublisher();
+    this.publisherPage$ = this.getPublisher();
   }
 
-  previousPage() {
-    if (this.page - 1 >= 1) {
-      this.page -= 1;
-      this.editoras$ = this.getPublisher();
-    }
-  }
-
-  nextPage() {
-    this.service.getCategory(this.params.get('nome')?.value, this.page + 1, this.params.controls['order']?.value).pipe(
-      map(array => array.length === 0)
-    ).subscribe((empty: boolean) => {
-      if (empty) {
-        console.log(empty)
-      } else {
-        this.page += 1;
-        this.editoras$ = this.getPublisher()
-      }
-    });
+  onChangePage() {
+    this.publisherPage$ = this.getPublisher();
   }
 
   onSearch() {
-    this.editoras$ = this.getPublisher()
+    this.publisherPage$ = this.getPublisher();
   }
 
   onEdit(editora: Editoras) {
@@ -78,16 +57,16 @@ export class ListarEditoraComponent implements OnInit {
     dialogRef.afterClosed().subscribe({
       next: data => {
         alert("Categoria atualizada com sucesso");
-        this.editoras$ = this.getPublisher();
+        this.publisherPage$ = this.getPublisher();
       },
     });
   }
 
   onDelete(id: number) {
-    this.service.deleteCategory(id).subscribe({
+    this.service.delete(id).subscribe({
       next: data => {
         alert("Editora deletada com sucesso");
-        this.editoras$ = this.getPublisher();
+        this.publisherPage$ = this.getPublisher();
       },
       error: error => {
         alert(error.error.detail);

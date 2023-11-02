@@ -4,6 +4,7 @@ import { Observable, map } from 'rxjs';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ProdutoService } from '../produto.service';
+import { EditProductComponent } from '../edit-product/edit-product.component';
 
 @Component({
   selector: 'app-listar-produto',
@@ -44,6 +45,31 @@ export class ListarProdutoComponent implements OnInit {
 
       onSearch() {
         this.productsPage$ = this.getProduct()
+      }
+
+      onEdit(produto: Produtos) {
+        const dialogRef = this.dialog.open(EditProductComponent)
+    
+        dialogRef.componentInstance.produto = produto;
+    
+        dialogRef.afterClosed().subscribe({
+          next: data => {
+            if(data == 'atualizou')
+              this.productsPage$ = this.getProduct();
+          },
+        });
+      }
+
+      onDelete(id: number) {
+        this.service.delete(id).subscribe({
+          next: data => {
+            alert("Produto deletado com sucesso");
+            this.productsPage$ = this.getProduct();
+          },
+          error: error => {
+            alert(error.error.detail);
+          }
+        });
       }
 
 }

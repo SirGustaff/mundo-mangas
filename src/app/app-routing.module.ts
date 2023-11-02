@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { MyAccountComponent } from './my-account/my-account.component';
+import { HomeComponent } from './cliente/home/home.component';
+import { MyAccountComponent } from './cliente/my-account/my-account.component';
 import { AdminComponent } from './admin/admin.component';
 import { AddCategoryComponent } from './admin/Categoria/add-category/add-category.component';
 import { AddPublisherComponent } from './admin/Editora/add-publisher/add-publisher.component';

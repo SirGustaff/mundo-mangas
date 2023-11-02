@@ -1,5 +1,5 @@
-<h1>Criar novo produto</h1>
-<form class="row g-3" [formGroup]="productForm">
+<h1>Editar Produto</h1>
+<form class="row g-3" id="wrapper" [formGroup]="productForm">
     <div class="col-md-4">
       <label for="nome" class="form-label">*Nome:</label>
       <input 
@@ -77,12 +77,12 @@
       <div class="col-md-6">
         <label for="editora" class="form-label">*Editora:</label>
         <select id="editora" formControlName="editora" class="form-select">
-          <option [value]="null">Escolha...</option>
+          <option [value]="null">Escolha a nova editora...</option>
           <option [ngValue]="editora" *ngFor="let editora of publisherArray">{{ editora.nome }}</option>
         </select>
       </div>
       <div class="col-md-6">
-        <label for="categorias" class="form-label">Categorias:</label>
+        <label for="categorias" class="form-label">Escolha as Novas Categorias:</label>
         <select id="categorias" formControlName="categorias" class="form-select" multiple="multiple">
           <option [ngValue]="categoria" *ngFor="let categoria of categoryArray">{{ categoria.nome }}</option>
         </select>
@@ -90,9 +90,9 @@
     <div class="col-12">
       <button type="submit"
       [disabled]="!productForm.valid"
-      (click)="onSubmit()" 
-      class="btn btn-primary">Adicionar Produto</button>
+      (click)="updateProduct()" 
+      class="btn btn-primary">Atualizar Produto</button>
     </div>
   </form>
-
+ 
  

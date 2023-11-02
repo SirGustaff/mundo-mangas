@@ -55,8 +55,8 @@ export class ListarCategoriaComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe({
       next: data => {
-        alert("Categoria atualizada com sucesso");
-        this.categoryPage$ = this.getCategory();
+        if(data == 'atualizou')
+          this.categoryPage$ = this.getCategory();
       },
     });
   }

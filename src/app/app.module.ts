@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { DefaultHeaderComponent } from './default-header/default-header.component';
-import { MyAccountComponent } from './my-account/my-account.component';
-import { HomeComponent } from './home/home.component';
+import { DefaultHeaderComponent } from './cliente/default-header/default-header.component';
+import { MyAccountComponent } from './cliente/my-account/my-account.component';
+import { HomeComponent } from './cliente/home/home.component';
 import { AdminHeaderComponent } from './admin/admin-header/admin-header.component';
 import { AdminComponent } from './admin/admin.component';
 import { AddCategoryComponent } from './admin/Categoria/add-category/add-category.component';
@@ -19,6 +19,8 @@ import { ListarEditoraComponent } from './admin/Editora/listar-editora/listar-ed
 import { EditPublisherComponent } from './admin/Editora/edit-publisher/edit-publisher.component';
 import { ListarProdutoComponent } from './admin/Produto/listar-produto/listar-produto.component';
 import { AddProductComponent } from './admin/Produto/add-product/add-product.component';
+import { EditProductComponent } from './admin/Produto/edit-product/edit-product.component';
+import { SearchPageComponent } from './cliente/search-page/search-page.component';
 
 
 @NgModule({
@@ -36,7 +38,9 @@ import { AddProductComponent } from './admin/Produto/add-product/add-product.com
     ListarEditoraComponent,
     EditPublisherComponent,
     ListarProdutoComponent,
-    AddProductComponent
+    AddProductComponent,
+    EditProductComponent,
+    SearchPageComponent
   ],
   imports: [
     BrowserModule,

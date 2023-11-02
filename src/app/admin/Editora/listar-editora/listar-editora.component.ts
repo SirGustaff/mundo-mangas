@@ -50,14 +50,17 @@ export class ListarEditoraComponent implements OnInit {
 
   onEdit(editora: Editoras) {
 
-    const dialogRef = this.dialog.open(EditPublisherComponent)
+    let dialogRef = this.dialog.open(EditPublisherComponent, {
+      width: 'auto',
+      height: 'auto'
+    });
 
     dialogRef.componentInstance.editora = editora;
 
     dialogRef.afterClosed().subscribe({
       next: data => {
-        alert("Categoria atualizada com sucesso");
-        this.publisherPage$ = this.getPublisher();
+        if(data == 'atualizou')
+          this.publisherPage$ = this.getPublisher();
       },
     });
   }

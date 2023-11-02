@@ -1,6 +1,5 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { formatDate } from '@angular/common';
 import { Editoras, PublisherPage } from '../../Editora/editoras';
 import { EditoraService } from '../../Editora/editora.service';
 import { ProdutoService } from '../produto.service';
@@ -8,14 +7,17 @@ import { Observable, of } from 'rxjs';
 import { concatMap } from 'rxjs/operators';
 import { Categorias } from '../../Categoria/categorias';
 import { CategoriaService } from '../../Categoria/categoria.service';
+import { Produtos } from '../produtos';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-add-product',
-  templateUrl: './add-product.component.html',
-  styleUrls: ['./add-product.component.css']
+  selector: 'app-edit-product',
+  templateUrl: './edit-product.component.html',
+  styleUrls: ['./edit-product.component.css']
 })
-export class AddProductComponent implements OnInit {
+export class EditProductComponent implements OnInit {
 
+  @Input() produto: Produtos;
 
   productForm: FormGroup;
 
@@ -30,6 +32,7 @@ export class AddProductComponent implements OnInit {
   categoryTotalPage: number;
 
   constructor(
+    private dialogRef: MatDialogRef<EditProductComponent>,
     private formBuilder: FormBuilder,
     private produtoService: ProdutoService,
     private editoraService: EditoraService,
@@ -39,17 +42,18 @@ export class AddProductComponent implements OnInit {
     ngOnInit() {
 
     this.productForm = this.formBuilder.group({
-      nome: [, [Validators.required, Validators.minLength(3), Validators.maxLength(120),]],
-      paginas: [, Validators.required],
-      uriFoto: [, [Validators.minLength(3), Validators.maxLength(255)]],
-      dataPublicacao: [],
-      preco: [, [Validators.required]],
-      estoque: [],
-      ativo: [],
-      colorido: [],
-      editora: [, [Validators.required]],
-      categorias: []
-    })
+      id: [this.produto.id],
+      nome: [this.produto.nome, [Validators.required, Validators.minLength(3), Validators.maxLength(120),]],
+      paginas: [this.produto.paginas, Validators.required],
+      uriFoto: [this.produto.uriFoto, [Validators.minLength(3), Validators.maxLength(255)]],
+      dataPublicacao: [this.produto.dataPublicacao,],
+      preco: [this.produto.preco, [Validators.required]],
+      estoque: [this.produto.estoque,],
+      ativo: [this.produto.ativo,],
+      colorido: [this.produto.colorido,],
+      editora: [this.produto.editora],
+      categorias: [this.produto.categorias,]
+    });
     
     this.editoraService.get('', 1, 'OrderByNameASC').pipe(
       concatMap(firstPage => {
@@ -84,20 +88,18 @@ export class AddProductComponent implements OnInit {
     });
   }
 
-  onSubmit() {
-    if(this.productForm.valid) {
-      this.produtoService.post(this.productForm.value).subscribe({
+  updateProduct() {
+    if (this.productForm.valid && this.productForm.valueChanges) {
+      this.produtoService.put(this.productForm.value).subscribe({
         next: data => {
-          alert("Produto Adicionado Com Sucesso")
-          this.productForm.reset();
+          alert('Produto Atualizado com Sucesso');
+          this.dialogRef.close('atualizou');
         },
-
         error: data => {
-          alert(data.detail)
-          console.log(this.productForm.value)
+          alert(data.detail);
+          this.dialogRef.close();
         }
       });
     }
   }
-
 }

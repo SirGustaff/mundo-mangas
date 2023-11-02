@@ -15,9 +15,9 @@ export class ProdutoService {
 
   private readonly urlGet = 'http://localhost:8080/produtos/por-nome';
 
-  private readonly urlPost = 'http://localhost:8080/editoras';
+  private readonly urlPost = 'http://localhost:8080/produtos';
 
-  private readonly urlPutDelete = 'http://localhost:8080/editoras/';
+  private readonly urlPutDelete = 'http://localhost:8080/produtos/';
 
   get(nome: string, page: number, order: string) {
 

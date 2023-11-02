@@ -29,10 +29,19 @@ export class EditPublisherComponent implements OnInit {
     })
   }
 
-  updateCategoria() {
-    if (this.editForm.valid) {
-      this.service.put(this.editForm.value).subscribe();
+  updatePublisher() {
+    if (this.editForm.valid && this.editForm.valueChanges) {
+
+      this.service.put(this.editForm.value).subscribe({
+        next: data => {
+          alert('Editora Atualizada com Sucesso');
+          this.dialogRef.close('atualizou');
+        },
+        error: data => {
+          alert(data.detail)
+          this.dialogRef.close();
+        }
+      });
     }
-    this.dialogRef.close();
   }
 }

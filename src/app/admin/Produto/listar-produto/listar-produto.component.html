@@ -36,8 +36,8 @@
           <th>Preço</th>
           <th>Condição</th>
           <th>Data</th>
-          <th>Quantidade em Estoque</th>
-          <th>Total Vendido</th>
+          <th>Qtd</th>
+          <th>T.Vendido</th>
           <th></th>
         </tr>
       </thead>
@@ -50,14 +50,18 @@
           <td>{{ produto.ativo? 'Disponível' : 'Indisponível'}}</td>
           <td>{{ produto.dataPublicacao }}</td>
           <td>{{ produto.estoque }}</td>
-          <td>{{ produto.totalVendido }}</td>
+          <td>{{ produto.totalVendido? produto.totalVendido : 0 }}</td>
           <td>
             <span class="float-end">
-              <button class="btn btn-outline-warning mb-1 btn-sm">
+              <button 
+              (click)="onEdit(produto)"
+              class="btn btn-outline-warning mb-1 btn-sm">
                 Atualizar
               </button>
               {{ ' ' }}
-              <button class="btn btn-outline-danger mb-1 btn-sm">
+              <button 
+              (click)="onDelete(produto.id)"
+              class="btn btn-outline-danger mb-1 btn-sm">
                 Remover
               </button>
             </span>

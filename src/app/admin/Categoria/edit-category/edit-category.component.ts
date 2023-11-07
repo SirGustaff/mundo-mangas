@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Categorias } from '../categorias';
 import { Form, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { CategoriaService } from '../categoria.service';
+import { CategoriaService } from '../../../services/categoria.service';
 import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { EditoraService } from '../editora.service';
+import { EditoraService } from '../../../services/editora.service';
 import { Editoras, PublisherPage } from '../editoras';
 import { Observable, isEmpty, map } from 'rxjs';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';

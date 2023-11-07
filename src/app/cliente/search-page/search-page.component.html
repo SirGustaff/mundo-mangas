@@ -1,1 +1,35 @@
-<p>search-page works!</p>
+<div class="search">
+    <h1>Resultados da busca por: {{ this.params.get('nome')?.value }}</h1>
+    <form [formGroup]="params" style="margin: 10px 0px;">
+        <span>Filtrar por ordem:</span>
+        <select formControlName="order" style="margin-left: 10px;" (change)="selectOrder()">
+          <option value="OrderByNameASC">A - Z</option>
+          <option value="OrderByNameDESC">Z - A</option>
+          <option value="OrderByPriceDESC">Maior Preço</option>
+          <option value="OrderByPriceASC">Menor Preço</option>
+          <option value="OrderByTopSaleDESC">Mais Vendidos</option>
+          <option value="OrderByReleaseDateDESC">Mais Recentes</option>
+        </select>
+      </form>
+    <div class="results-wrapper">
+        <div class="results" *ngFor="let produto of (productsPage$ | async)?.items">
+            <div class="card h-100" style="width: 15rem;">
+                <img src="{{ produto.uriFoto }}" class="card-img-top" alt="..." >
+                <div class="card-body">
+                  <h3 class="card-title">{{ produto.nome }}</h3>
+                  <p class="card-text">{{ produto.descricao }}</p>
+                  <h4>R${{ produto.preco | number:'1.2-2' }}</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="display: flex; justify-content: center;">
+        <form [formGroup]="params">
+          <select formControlName="page" (change)="onChangePage()">
+            <option *ngFor="let page of [].constructor((productsPage$ | async)?.totalPages); let i = index" [value]="i+1">
+              Página: {{ i+1 }}</option>
+          </select>
+        </form>
+    </div>
+</div>
+

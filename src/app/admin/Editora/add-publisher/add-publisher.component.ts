@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { EditoraService } from '../editora.service';
+import { EditoraService } from '../../../services/editora.service';
 
 @Component({
   selector: 'app-add-publisher',

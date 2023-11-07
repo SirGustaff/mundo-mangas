@@ -3,7 +3,7 @@ import { Produtos, ProductsPage } from '../produtos'
 import { Observable, map } from 'rxjs';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { ProdutoService } from '../produto.service';
+import { ProdutoService } from '../../../services/produto.service';
 import { EditProductComponent } from '../edit-product/edit-product.component';
 
 @Component({

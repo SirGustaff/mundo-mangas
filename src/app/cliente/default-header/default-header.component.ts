@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { SearchService } from 'src/app/services/search.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'default-header',
@@ -7,6 +10,17 @@ import { Component } from '@angular/core';
 })
 export class DefaultHeaderComponent {
 
-  
+
+  constructor(private router: Router, private searchService: SearchService) {}
+
+  submitSearch(searchInput : string) {
+
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    
+    this.searchService.nome = searchInput;
+
+    this.router.navigate([`search/${searchInput}`]);
+
+  }
 
 }

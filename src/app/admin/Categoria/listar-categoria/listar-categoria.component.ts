@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { CategoriaService } from '../categoria.service';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { CategoriaService } from '../../../services/categoria.service';
 import { Categorias, CategoryPage } from '../categorias';
-import { Observable, isEmpty, map } from 'rxjs';
+import { Observable, Unsubscribable } from 'rxjs';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { EditCategoryComponent } from '../edit-category/edit-category.component';
@@ -67,6 +67,10 @@ export class ListarCategoriaComponent implements OnInit {
         alert("Categoria deletada com sucesso");
         this.categoryPage$ = this.getCategory();
       },
+      error: error => {
+        alert(error.error.detail);
+      }
     });
   }
+
 }

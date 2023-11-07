@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Editoras, PublisherPage } from './editoras';
+import { Editoras, PublisherPage } from '../admin/Editora/editoras';
 import { take, tap } from 'rxjs/operators';
 
 @Injectable({

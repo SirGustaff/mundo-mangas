@@ -9,6 +9,7 @@ import { ListarCategoriaComponent } from './admin/Categoria/listar-categoria/lis
 import { ListarEditoraComponent } from './admin/Editora/listar-editora/listar-editora.component';
 import { ListarProdutoComponent } from './admin/Produto/listar-produto/listar-produto.component';
 import { AddProductComponent } from './admin/Produto/add-product/add-product.component';
+import { SearchPageComponent } from './cliente/search-page/search-page.component';
 
 const routes: Routes = [
   {
@@ -18,6 +19,10 @@ const routes: Routes = [
   {
     path: 'my-account',
     component: MyAccountComponent
+  },
+  {
+    path: 'search/:search',
+    component: SearchPageComponent,
   },
   {
     path: 'admin',
@@ -52,7 +57,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {onSameUrlNavigation: 'reload'})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

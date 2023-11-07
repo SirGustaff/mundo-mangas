@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Editoras } from '../editoras';
 import { Form, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { EditoraService } from '../editora.service';
+import { EditoraService } from '../../../services/editora.service';
 import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({

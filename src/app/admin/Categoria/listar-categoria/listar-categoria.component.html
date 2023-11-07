@@ -49,7 +49,7 @@
         </tr>
       </tbody>
     </table>
-    <div style="display: flex; justify-content: center;">
+    <div style="display: flex; justify-content: center;" *ngIf="(categoryPage$ | async)!.totalItems > 20">
       <form [formGroup]="params">
         <select formControlName="page" (change)="onChangePage()">
           <option *ngFor="let page of [].constructor((categoryPage$ | async)?.totalPages); let i = index" [value]="i+1">

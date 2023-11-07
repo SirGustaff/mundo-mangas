@@ -9,5 +9,9 @@ main {
     margin: 15px 0px;
     grid-template-columns: 1fr 3fr 1fr;
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

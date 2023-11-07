@@ -22,6 +22,7 @@ import { ListarProdutoComponent } from './admin/Produto/listar-produto/listar-pr
 import { AddProductComponent } from './admin/Produto/add-product/add-product.component';
 import { EditProductComponent } from './admin/Produto/edit-product/edit-product.component';
 import { SearchPageComponent } from './cliente/search-page/search-page.component';
+import { DetailsComponent } from './cliente/product-details/details.component';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { SearchPageComponent } from './cliente/search-page/search-page.component
     ListarProdutoComponent,
     AddProductComponent,
     EditProductComponent,
-    SearchPageComponent
+    SearchPageComponent,
+    DetailsComponent
   ],
   imports: [
     BrowserModule,

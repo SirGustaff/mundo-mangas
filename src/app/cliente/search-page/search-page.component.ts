@@ -1,9 +1,9 @@
-import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
-import { ProductsPage } from 'src/app/admin/Produto/produtos';
+import { Component, OnInit } from '@angular/core';
+import { ProductsPage } from 'src/app/Interfaces/produtos';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { SearchService } from 'src/app/services/search.service';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-search-page',
@@ -22,7 +22,8 @@ export class SearchPageComponent implements OnInit {
 
   constructor(
     private searchService: SearchService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private router: Router
     ) {}
 
   ngOnInit() {
@@ -39,6 +40,11 @@ export class SearchPageComponent implements OnInit {
 
   selectOrder() {
     this.productsPage$ = this.getProducts();
+  }
+
+  showDetails(id: number) {
+    this.searchService.id = id;
+    this.router.navigate([`details/${id}`])
   }
 
 }

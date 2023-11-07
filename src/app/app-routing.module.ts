@@ -10,6 +10,7 @@ import { ListarEditoraComponent } from './admin/Editora/listar-editora/listar-ed
 import { ListarProdutoComponent } from './admin/Produto/listar-produto/listar-produto.component';
 import { AddProductComponent } from './admin/Produto/add-product/add-product.component';
 import { SearchPageComponent } from './cliente/search-page/search-page.component';
+import { DetailsComponent } from './cliente/product-details/details.component';
 
 const routes: Routes = [
   {
@@ -23,6 +24,10 @@ const routes: Routes = [
   {
     path: 'search/:search',
     component: SearchPageComponent,
+  },
+  {
+    path: 'details/:id',
+    component: DetailsComponent
   },
   {
     path: 'admin',

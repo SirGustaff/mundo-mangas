@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Produtos, ProductsPage } from '../admin/Produto/produtos';
+import { Produtos, ProductsPage } from '../Interfaces/produtos';
 import { take, tap } from 'rxjs/operators';
 
 @Injectable({
@@ -10,12 +10,15 @@ export class SearchService {
 
   nome: string;
 
+  id: number;
+
   constructor(private http: HttpClient) {} 
 
   private readonly searchProducts = 'http://localhost:8080/produtos/por-nome?'
 
-  get(nome: string, page: number, order: string) {
+  private readonly searchProductsById = 'http://localhost:8080/produtos/'
 
+  get(nome: string, page: number, order: string) {
     let params = new HttpParams();
     params = params.set('nome', nome)
     params = params.set('page', page);
@@ -25,7 +28,13 @@ export class SearchService {
     .pipe(
       tap(console.log)
     );
+  }
 
+  getById(id: number) {
+    return this.http.get<Produtos>(`${this.searchProductsById}${id}`)
+    .pipe(
+      tap(console.log)
+    );
   }
 
 }

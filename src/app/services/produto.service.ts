@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Produtos, ProductsPage } from '../admin/Produto/produtos';
+import { Produtos, ProductsPage } from '../Interfaces/produtos';
 import { take, tap } from 'rxjs/operators';
 
 @Injectable({

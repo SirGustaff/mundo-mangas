@@ -1,5 +1,5 @@
 import { Component, OnInit} from '@angular/core';
-import { Produtos, ProductsPage } from '../produtos'
+import { Produtos, ProductsPage } from '../../../Interfaces/produtos'
 import { Observable, map } from 'rxjs';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';

@@ -1,13 +1,13 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Editoras, PublisherPage } from '../../Editora/editoras';
+import { Editoras, PublisherPage } from '../../../Interfaces/editoras';
 import { EditoraService } from '../../../services/editora.service';
 import { ProdutoService } from '../../../services/produto.service';
 import { Observable, of } from 'rxjs';
 import { concatMap } from 'rxjs/operators';
-import { Categorias } from '../../Categoria/categorias';
+import { Categorias } from '../../../Interfaces/categorias';
 import { CategoriaService } from '../../../services/categoria.service';
-import { Produtos } from '../produtos';
+import { Produtos } from '../../../Interfaces/produtos';
 import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({

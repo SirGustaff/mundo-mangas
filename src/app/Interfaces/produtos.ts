@@ -1,5 +1,5 @@
-import { Editoras } from '../Editora/editoras';
-import { Categorias } from '../Categoria/categorias';
+import { Editoras } from './editoras';
+import { Categorias } from './categorias';
 
 export interface ProductsPage {
     items: Produtos[];

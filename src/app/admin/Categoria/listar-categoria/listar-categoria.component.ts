@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CategoriaService } from '../../../services/categoria.service';
-import { Categorias, CategoryPage } from '../categorias';
+import { Categorias, CategoryPage } from '../../../Interfaces/categorias';
 import { Observable, Unsubscribable } from 'rxjs';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';

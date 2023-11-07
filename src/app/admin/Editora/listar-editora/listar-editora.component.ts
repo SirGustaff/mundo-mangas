@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EditoraService } from '../../../services/editora.service';
-import { Editoras, PublisherPage } from '../editoras';
+import { Editoras, PublisherPage } from '../../../Interfaces/editoras';
 import { Observable, isEmpty, map } from 'rxjs';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';

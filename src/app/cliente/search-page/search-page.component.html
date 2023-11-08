@@ -1,7 +1,7 @@
 <div class="search">
   <div class="search-menu">
-    <h1>Resultados da busca por: {{ this.params.get('nome')?.value }}</h1>
-    <form [formGroup]="params" style="margin: 10px 0px;">
+    <h1>{{ (productsPage$ | async)!.totalItems > 0 ? 'Quantidade de produtos encontrados: ' + (productsPage$ | async)?.totalItems : 'Não existe produtos que correspondem a sua busca'}}</h1>
+    <form [formGroup]="params" style="margin: 10px 0px;" *ngIf="(productsPage$ | async)!.totalItems > 0">
       <span>Filtrar por ordem:</span>
       <select formControlName="order" style="margin-left: 10px;" (change)="selectOrder()">
         <option value="OrderByNameASC">A - Z</option>

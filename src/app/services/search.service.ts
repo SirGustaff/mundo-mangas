@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Produtos, ProductsPage } from '../Interfaces/produtos';
-import { take, tap } from 'rxjs/operators';
+import { take, tap, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +26,10 @@ export class SearchService {
     
     return this.http.get<ProductsPage>(this.searchProducts, { params })
     .pipe(
+      map((productsPage: ProductsPage) => ({
+        ...productsPage,
+        items: productsPage.items.filter(produto => produto.ativo)
+      })),
       tap(console.log)
     );
   }

@@ -23,6 +23,7 @@ import { AddProductComponent } from './admin/Produto/add-product/add-product.com
 import { EditProductComponent } from './admin/Produto/edit-product/edit-product.component';
 import { SearchPageComponent } from './cliente/search-page/search-page.component';
 import { DetailsComponent } from './cliente/product-details/details.component';
+import { DefaultFooterComponent } from './cliente/default-footer/default-footer.component';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { DetailsComponent } from './cliente/product-details/details.component';
     AddProductComponent,
     EditProductComponent,
     SearchPageComponent,
-    DetailsComponent
+    DetailsComponent,
+    DefaultFooterComponent
   ],
   imports: [
     BrowserModule,

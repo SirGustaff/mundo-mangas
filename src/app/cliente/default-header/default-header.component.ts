@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SearchService } from 'src/app/services/search.service';
 import { Router } from '@angular/router';
+import { UserAuthService } from 'src/app/services/user-auth.service';
 
 
 @Component({
@@ -8,10 +9,18 @@ import { Router } from '@angular/router';
   templateUrl: './default-header.component.html',
   styleUrls: ['./default-header.component.css']
 })
-export class DefaultHeaderComponent {
+export class DefaultHeaderComponent implements OnInit {
 
 
-  constructor(private router: Router, private searchService: SearchService) {}
+  constructor(
+    private router: Router, 
+    private searchService: SearchService,
+    private userAuthService: UserAuthService
+  ) {}
+
+  ngOnInit(): void {
+      
+  }
 
   submitSearch(searchInput : string) {
 
@@ -21,6 +30,15 @@ export class DefaultHeaderComponent {
 
     this.router.navigate([`search/${searchInput}`]);
 
+  }
+
+  isLoggedIn() {
+    return this.userAuthService.isLoggedIn();
+  }
+
+  logout() {
+    this.userAuthService.clear();
+    this.router.navigate(['']);
   }
 
 }

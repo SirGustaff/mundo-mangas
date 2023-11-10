@@ -11,6 +11,10 @@ import { ListarProdutoComponent } from './admin/Produto/listar-produto/listar-pr
 import { AddProductComponent } from './admin/Produto/add-product/add-product.component';
 import { SearchPageComponent } from './cliente/search-page/search-page.component';
 import { DetailsComponent } from './cliente/product-details/details.component';
+import { LoginComponent } from './cliente/login/login.component';
+import { NewAccountComponent } from './cliente/new-account/new-account.component';
+import { CartComponent } from './cliente/cart/cart.component';
+import { authGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -28,6 +32,19 @@ const routes: Routes = [
   {
     path: 'details/:id',
     component: DetailsComponent
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
+  {
+    path: 'new-account',
+    component: NewAccountComponent
+  },
+  {
+    path: "cart",
+    component: CartComponent,
+    canActivate: [authGuard]
   },
   {
     path: 'admin',

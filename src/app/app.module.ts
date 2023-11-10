@@ -24,6 +24,9 @@ import { EditProductComponent } from './admin/Produto/edit-product/edit-product.
 import { SearchPageComponent } from './cliente/search-page/search-page.component';
 import { DetailsComponent } from './cliente/product-details/details.component';
 import { DefaultFooterComponent } from './cliente/default-footer/default-footer.component';
+import { LoginComponent } from './cliente/login/login.component';
+import { NewAccountComponent } from './cliente/new-account/new-account.component';
+import { CartComponent } from './cliente/cart/cart.component';
 
 
 @NgModule({
@@ -45,7 +48,10 @@ import { DefaultFooterComponent } from './cliente/default-footer/default-footer.
     EditProductComponent,
     SearchPageComponent,
     DetailsComponent,
-    DefaultFooterComponent
+    DefaultFooterComponent,
+    LoginComponent,
+    NewAccountComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,

@@ -14,7 +14,19 @@
                 </button>
             </form>
         </div>
-        <a [routerLink]="['my-account']"><img src="../../assets/icones-svg/silhueta.svg" alt="Perfil" class="icones"></a>
+        <a class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="../../assets/icones-svg/silhueta.svg" alt="Perfil" class="icones">
+        </a>
+        <ul class="dropdown-menu">
+            <li *ngIf="isLoggedIn()"><a class="dropdown-item" href="#">Meus Dados Pessoais</a></li>
+            <li *ngIf="isLoggedIn()"><a class="dropdown-item" href="#">Meus Pedidos</a></li>
+            <li *ngIf="isLoggedIn()"><a class="dropdown-item" href="#">Meus Cartões</a></li>
+            <li *ngIf="isLoggedIn()"><a class="dropdown-item" href="#">Lista de Desejos</a></li>
+            <li *ngIf="isLoggedIn()"><a class="dropdown-item" (click)="logout()">Sair da Conta</a></li>
+            <li *ngIf="!isLoggedIn()"><a class="dropdown-item" [routerLink]="['/login']">Entrar</a></li>
+            <li *ngIf="!isLoggedIn()"><a class="dropdown-item" [routerLink]="['/new-account']">Criar Conta</a></li>
+        </ul>
+
         <img src="../../assets/icones-svg/carrinho_de_compras.svg" alt="Carrinho" class="icones">
     </div>
     <nav>
